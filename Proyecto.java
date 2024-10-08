@@ -9,7 +9,6 @@ public class Proyecto {
     private ArrayList<Tarea> tareas;
     private EstrategiaAsignacionTareas estrategia;
 
-
     public Proyecto(String nombre, String descripcion, Cliente cliente, Empleado gerente, EstrategiaAsignacionTareas estrategia) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -20,26 +19,33 @@ public class Proyecto {
         this.estrategia = estrategia;
     }
 
-
     public void asignarEmpleado(Empleado empleado) {
-        empleados.add(empleado);
+        if (!empleados.contains(empleado)) { // Evitar duplicados
+            empleados.add(empleado);
+        }
     }
-
 
     public void agregarTarea(Tarea tarea) {
-        tareas.add(tarea);
+        if (!tareas.contains(tarea)) { // Evitar duplicados
+            tareas.add(tarea);
+        }
     }
-
 
     public void asignarTarea(Tarea tarea) {
-        estrategia.asignarTarea(tarea, empleados);
+        if (tareas.contains(tarea)) { // Solo asignar si la tarea ya está en la lista
+            estrategia.asignarTarea(tarea, empleados);
+        } else {
+            System.out.println("La tarea no está registrada en el proyecto.");
+        }
     }
 
-    // esto va a mostrar un resumen del estado del proyecto
+    public ArrayList<Tarea> getTareas() {
+        return tareas; // Nuevo método para obtener la lista de tareas
+    }
+
     public String mostrarResumen() {
         int tareasPendientes = 0, tareasEnCurso = 0, tareasFinalizadas = 0;
 
-        // Para ver todaas las tareas y en que estado estan
         for (Tarea tarea : tareas) {
             switch (tarea.getEstado()) {
                 case PENDIENTE:
@@ -59,7 +65,6 @@ public class Proyecto {
                 "\nFinalizadas: " + tareasFinalizadas;
     }
 
-    // pa mostrar el nombre del proyecto
     public String getNombre() {
         return nombre;
     }

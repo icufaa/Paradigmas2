@@ -5,7 +5,7 @@ public class Tester extends Empleado{
 
     @Override
     public void actualizar(Tarea tarea) {
-        System.out.println("Desarrollador " + getNombre() + " ha sido notificado de que la tarea '"
-                + tarea.getNombre() + "' ha cambiado su estado a: " + tarea.getEstado());
+        System.out.println("Tester " + getNombre() + " ha sido notificado de que la tarea '" + tarea.getNombre() + "' ha cambiado de estado a " + tarea.getEstado());
+        // Asegúrate de no cambiar el estado aquí para evitar ciclos
     }
 }

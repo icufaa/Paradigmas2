@@ -4,31 +4,29 @@ public class Menu {
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
         GestorDeProyectos gestor = GestorDeProyectos.getInstancia();
-        BaseDeDatosAntigua baseAntigua = new BaseDeDatosAntigua();
-        AdaptadorDeBaseDeDatos adaptador = new AdaptadorDeBaseDeDatos(baseAntigua);
 
-        while (true) {
+        while (true){
             System.out.println("\nMenú:");
             System.out.println("1. Agregar Proyecto");
             System.out.println("2. Agregar Empleado");
             System.out.println("3. Asignar Empleado a Proyecto");
             System.out.println("4. Asignar Tarea a Empleado");
             System.out.println("5. Mostrar Resumen de Proyecto");
-            System.out.println("6. Cargar Proyecto desde la Base de Datos Antigua");
+            System.out.println("6. Simular Notificaciones de Tareas");
             System.out.println("7. Salir");
-            System.out.print("Elige una opción: ");
+            System.out.print("Elegi una opcion flaquito: ");
             int opcion = scanner.nextInt();
             scanner.nextLine(); // Consumir la nueva línea que queda después de nextInt()
 
-            switch (opcion) {
+            switch (opcion){
                 // Caso 1: Agregar proyecto
                 case 1:
                     System.out.print("Nombre del proyecto: ");
                     String nombreProyecto = scanner.nextLine();
                     System.out.print("Descripción: ");
                     String descripcion = scanner.nextLine();
-                    Cliente cliente = new Cliente("El bicho", "bichito@gmail.com");
-                    Empleado gerente = FabricaDeEmpleados.crearEmpleado("Desarrollador", "Messi");
+                    Cliente cliente = new Cliente("El bicho","bichito@gmail.com");
+                    Empleado gerente = FabricaDeEmpleados.crearEmpleado("Desarrollador","Messi");
                     Proyecto proyecto = new Proyecto(nombreProyecto, descripcion, cliente, gerente, new AsignacionAleatoria());
                     gestor.agregarProyecto(proyecto);
                     System.out.println("Proyecto agregado.");
@@ -88,7 +86,7 @@ public class Menu {
                     Tarea tarea = new Tarea(nombreTarea);
                     proyectoSeleccionado.agregarTarea(tarea);
                     proyectoSeleccionado.asignarTarea(tarea);
-                    System.out.println("Tarea asignada exitosamente.");
+                    System.out.println("Tarea '" + tarea.getNombre() + "' asignada exitosamente.");
                     break;
 
                 // Caso 5: Mostrar resumen del proyecto
@@ -105,21 +103,24 @@ public class Menu {
                     System.out.println(proyectoSeleccionado.mostrarResumen());
                     break;
 
-                // Caso 6: Cargar Proyecto desde la Base de Datos Antigua
+                // Caso 6: Simular notificaciones
                 case 6:
-                    System.out.print("Introduce el ID del proyecto antiguo: ");
-                    String idProyectoAntiguo = scanner.nextLine();
-                    Proyecto proyectoAdaptado = adaptador.obtenerProyectoAdaptado(idProyectoAntiguo);
-                    gestor.agregarProyecto(proyectoAdaptado);
-                    System.out.println("Proyecto adaptado y agregado: " + proyectoAdaptado.getNombre());
+                    System.out.println("Simulando notificaciones de tareas a los empleados...");
+                    for (Empleado emp : gestor.getEmpleados()) {
+                        for (Tarea t : emp.getTareasAsignadas()) {
+                            emp.actualizar(t);
+                        }
+                    }
+                    System.out.println("Notificaciones enviadas.");
                     break;
 
-                // Caso 7: Salir
+                // Caso 7: Salir del menú
                 case 7:
                     System.out.println("Saliendo...");
                     scanner.close();
                     return;
 
+                // Default
                 default:
                     System.out.println("Opción no válida.");
             }

@@ -26,7 +26,9 @@ public abstract class Empleado {
 
     public void asignarTarea(Tarea tarea) {
         tareasAsignadas.add(tarea);
+        // No notificar aquí, dejémoslo para que la tarea lo maneje
     }
+
 
     public int getCantidadTareas() {
         return tareasAsignadas.size();
