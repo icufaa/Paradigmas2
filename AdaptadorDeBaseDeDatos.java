@@ -1,10 +1,24 @@
 public class AdaptadorDeBaseDeDatos {
-    //esto me robe de chatgpt porque ni idea la verdad, ni use esta wea
+    private BaseDeDatosAntigua baseDeDatosAntigua;
 
-    // Implementa las conversiones para integrar la base de datos antigua
-    public void obtenerDatosAntiguos() {
-        // Lógica para transformar y adaptar datos del sistema antiguo
-        System.out.println("Datos convertidos del sistema antiguo.");
+    public AdaptadorDeBaseDeDatos(BaseDeDatosAntigua baseDeDatosAntigua) {
+        this.baseDeDatosAntigua = baseDeDatosAntigua;
+    }
+
+    // Metodo que adapta los datos antiguos a los actuales
+    public Proyecto obtenerProyectoAdaptado(String id) {
+        // Obtener datos en el formato antiguo
+        DatosProyectoAntiguo datosAntiguos = baseDeDatosAntigua.obtenerProyectoAntiguo(id);
+
+        // Convertir datos antiguos a datos compatibles con el sistema moderno
+        String nombre = datosAntiguos.getNombreViejo();
+        String descripcion = datosAntiguos.getDescripcionVieja();
+        Cliente cliente = new Cliente(datosAntiguos.getClienteViejo(), "cliente@viejo.com");
+
+        // Crea un gerente de prueba (puedes adaptar esto si tienes datos en la base antigua)
+        Empleado gerente = FabricaDeEmpleados.crearEmpleado("Desarrollador", "Gerente Antiguo");
+
+        // Devuelve un objeto Proyecto moderno con los datos adaptados
+        return new Proyecto(nombre, descripcion, cliente, gerente, new AsignacionAleatoria());
     }
 }
-

@@ -1,5 +1,4 @@
 public class Tarea {
-    // enum para los estados de las tareas, con cadena de caracteres se rompia todo
     public enum EstadoTarea {
         PENDIENTE,
         EN_CURSO,
@@ -15,31 +14,31 @@ public class Tarea {
         this.estado = EstadoTarea.PENDIENTE;
     }
 
-
     public EstadoTarea getEstado() {
         return estado;
     }
-
 
     public void setEstado(EstadoTarea estado) {
         this.estado = estado;
         notificarEmpleado();
     }
 
+    public String getNombre() {
+        return nombre;
+    }
 
     public Empleado getEmpleado() {
         return empleado;
     }
 
-
+    // Este es el método que debes verificar o agregar
     public void asignarEmpleado(Empleado empleado) {
         this.empleado = empleado;
     }
 
-
     private void notificarEmpleado() {
         if (empleado != null) {
-            empleado.actualizar(this);  // esto creo que tendria que estar en la clase empleado pero bue
+            empleado.actualizar(this);
         }
     }
 }

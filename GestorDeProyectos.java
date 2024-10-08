@@ -10,6 +10,7 @@ public class GestorDeProyectos {
         empleados = new ArrayList<>();
     }
 
+    // para obtener la unica instancia de GestorProyectos (Singleton)
     public static GestorDeProyectos getInstancia(){
         if (instancia == null){
             instancia = new GestorDeProyectos();

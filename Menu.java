@@ -4,51 +4,56 @@ public class Menu {
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
         GestorDeProyectos gestor = GestorDeProyectos.getInstancia();
+        BaseDeDatosAntigua baseAntigua = new BaseDeDatosAntigua();
+        AdaptadorDeBaseDeDatos adaptador = new AdaptadorDeBaseDeDatos(baseAntigua);
 
-        while (true){
+        while (true) {
             System.out.println("\nMenú:");
             System.out.println("1. Agregar Proyecto");
             System.out.println("2. Agregar Empleado");
             System.out.println("3. Asignar Empleado a Proyecto");
             System.out.println("4. Asignar Tarea a Empleado");
             System.out.println("5. Mostrar Resumen de Proyecto");
-            System.out.println("6. Salir");
-            System.out.print("Elegi una opcion flaquito: ");
+            System.out.println("6. Cargar Proyecto desde la Base de Datos Antigua");
+            System.out.println("7. Salir");
+            System.out.print("Elige una opción: ");
             int opcion = scanner.nextInt();
+            scanner.nextLine(); // Consumir la nueva línea que queda después de nextInt()
 
-            switch (opcion){
-                //caso 1 agregar proyecto
+            switch (opcion) {
+                // Caso 1: Agregar proyecto
                 case 1:
                     System.out.print("Nombre del proyecto: ");
-                    String nombreProyecto = scanner.next();
-                    System.out.print("Descripcion: ");
-                    String descripcion = scanner.next();
-                    Cliente cliente = new Cliente("El bicho","bichito@gmail.com");
-                    Empleado gerente = FabricaDeEmpleados.crearEmpleado("Desarrollador","Messi");
+                    String nombreProyecto = scanner.nextLine();
+                    System.out.print("Descripción: ");
+                    String descripcion = scanner.nextLine();
+                    Cliente cliente = new Cliente("El bicho", "bichito@gmail.com");
+                    Empleado gerente = FabricaDeEmpleados.crearEmpleado("Desarrollador", "Messi");
                     Proyecto proyecto = new Proyecto(nombreProyecto, descripcion, cliente, gerente, new AsignacionAleatoria());
                     gestor.agregarProyecto(proyecto);
                     System.out.println("Proyecto agregado.");
                     break;
 
-                    //caso 2 agregar un empleadito
+                // Caso 2: Agregar empleado
                 case 2:
                     System.out.print("Nombre del empleado: ");
-                    String nombreEmpleado = scanner.next();
+                    String nombreEmpleado = scanner.nextLine();
                     System.out.print("Rol (Desarrollador/Tester): ");
-                    String tipoEmpleado = scanner.next();
+                    String tipoEmpleado = scanner.nextLine();
                     Empleado empleado = FabricaDeEmpleados.crearEmpleado(tipoEmpleado, nombreEmpleado);
                     gestor.agregarEmpleado(empleado);
                     System.out.println("Empleado agregado.");
                     break;
 
+                // Caso 3: Asignar empleado a proyecto
                 case 3:
-                    // para que el empleado agarre un laburo honesto
                     System.out.println("Lista de proyectos:");
                     for (int i = 0; i < gestor.getProyectos().size(); i++) {
                         System.out.println((i + 1) + ". " + gestor.getProyectos().get(i).getNombre());
                     }
                     System.out.print("Selecciona un proyecto: ");
                     int proyectoIndex = scanner.nextInt() - 1;
+                    scanner.nextLine(); // Consumir la nueva línea
 
                     System.out.println("Lista de empleados:");
                     for (int i = 0; i < gestor.getEmpleados().size(); i++) {
@@ -56,6 +61,7 @@ public class Menu {
                     }
                     System.out.print("Selecciona un empleado: ");
                     int empleadoIndex = scanner.nextInt() - 1;
+                    scanner.nextLine(); // Consumir la nueva línea
 
                     Proyecto proyectoSeleccionado = gestor.getProyectos().get(proyectoIndex);
                     Empleado empleadoSeleccionado = gestor.getEmpleados().get(empleadoIndex);
@@ -64,19 +70,20 @@ public class Menu {
                     System.out.println("Empleado " + empleadoSeleccionado.getNombre() + " asignado al proyecto " + proyectoSeleccionado.getNombre() + ".");
                     break;
 
+                // Caso 4: Asignar tarea a empleado
                 case 4:
-                    // y aca que el empleado vaya a laburar
                     System.out.println("Lista de proyectos:");
                     for (int i = 0; i < gestor.getProyectos().size(); i++) {
                         System.out.println((i + 1) + ". " + gestor.getProyectos().get(i).getNombre());
                     }
                     System.out.print("Selecciona un proyecto: ");
                     proyectoIndex = scanner.nextInt() - 1;
+                    scanner.nextLine(); // Consumir la nueva línea
 
                     proyectoSeleccionado = gestor.getProyectos().get(proyectoIndex);
 
                     System.out.print("Nombre de la tarea: ");
-                    String nombreTarea = scanner.next();
+                    String nombreTarea = scanner.nextLine();
 
                     Tarea tarea = new Tarea(nombreTarea);
                     proyectoSeleccionado.agregarTarea(tarea);
@@ -84,33 +91,38 @@ public class Menu {
                     System.out.println("Tarea asignada exitosamente.");
                     break;
 
+                // Caso 5: Mostrar resumen del proyecto
                 case 5:
-                    // print del resumen del proyecto (?
                     System.out.println("Lista de proyectos:");
                     for (int i = 0; i < gestor.getProyectos().size(); i++) {
                         System.out.println((i + 1) + ". " + gestor.getProyectos().get(i).getNombre());
                     }
                     System.out.print("Selecciona un proyecto: ");
                     proyectoIndex = scanner.nextInt() - 1;
+                    scanner.nextLine(); // Consumir la nueva línea
 
                     proyectoSeleccionado = gestor.getProyectos().get(proyectoIndex);
                     System.out.println(proyectoSeleccionado.mostrarResumen());
                     break;
 
+                // Caso 6: Cargar Proyecto desde la Base de Datos Antigua
                 case 6:
-                    // pa salir
+                    System.out.print("Introduce el ID del proyecto antiguo: ");
+                    String idProyectoAntiguo = scanner.nextLine();
+                    Proyecto proyectoAdaptado = adaptador.obtenerProyectoAdaptado(idProyectoAntiguo);
+                    gestor.agregarProyecto(proyectoAdaptado);
+                    System.out.println("Proyecto adaptado y agregado: " + proyectoAdaptado.getNombre());
+                    break;
+
+                // Caso 7: Salir
+                case 7:
                     System.out.println("Saliendo...");
                     scanner.close();
                     return;
 
                 default:
                     System.out.println("Opción no válida.");
-
             }
-
-
-
-
         }
     }
 }

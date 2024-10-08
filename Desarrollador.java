@@ -5,6 +5,7 @@ public class Desarrollador extends Empleado{
 
     @Override
     public void actualizar(Tarea tarea) {
-        System.out.println("Desarrollador " + getNombre() + " ha sido notificado del cambio de estado de la tarea: " + tarea.getEstado());
+        System.out.println("Desarrollador " + getNombre() + " ha sido notificado de que la tarea '"
+                + tarea.getNombre() + "' ha cambiado su estado a: " + tarea.getEstado());
     }
 }
