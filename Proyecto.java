@@ -32,7 +32,7 @@ public class Proyecto {
     }
 
     public void asignarTarea(Tarea tarea) {
-        if (tareas.contains(tarea)) { // Solo asignar si la tarea ya está en la lista
+        if (tareas.contains(tarea)) { // asigna solo si la tarea ya esta lista
             estrategia.asignarTarea(tarea, empleados);
         } else {
             System.out.println("La tarea no está registrada en el proyecto.");
@@ -40,7 +40,7 @@ public class Proyecto {
     }
 
     public ArrayList<Tarea> getTareas() {
-        return tareas; // Nuevo método para obtener la lista de tareas
+        return tareas;
     }
 
     public String mostrarResumen() {
