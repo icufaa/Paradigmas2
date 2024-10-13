@@ -19,9 +19,9 @@ public class Tarea {
     }
 
     public void setEstado(EstadoTarea estado) {
-        if (this.estado != estado) { // Solo notificar si hay un cambio
+        if (this.estado != estado) { // solo va a notificar si hay un cambio
             this.estado = estado;
-            notificarEmpleado(); // Llamamos al metodo para notificar al empleado cuando cambia el estado
+            notificarEmpleado();
         }
     }
 
@@ -37,12 +37,11 @@ public class Tarea {
     public void asignarEmpleado(Empleado empleado) {
         this.empleado = empleado;
         System.out.println("Tarea '" + nombre + "' asignada a " + empleado.getNombre() + " (" + empleado.getRol() + ").");
-        empleado.asignarTarea(this); // Asigna la tarea a la lista de tareas del empleado
+        empleado.asignarTarea(this); // va a asignar la tarea a la lista de tareas del empleado
     }
 
     private void notificarEmpleado() {
         if (empleado != null) {
-            // Solo notifica si hay un cambio real que reportar
             empleado.actualizar(this);
         }
     }
