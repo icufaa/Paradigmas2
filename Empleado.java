@@ -9,7 +9,7 @@ public abstract class Empleado {
     public Empleado(String nombre, String rol) {
         this.nombre = nombre;
         this.rol = rol;
-        this.tareasAsignadas = new ArrayList<>(); // Nueva lista para las tareas asignadas
+        this.tareasAsignadas = new ArrayList<>(); // lista para las tareas asignadas
     }
 
     public String getNombre() {
@@ -26,7 +26,7 @@ public abstract class Empleado {
 
     public void asignarTarea(Tarea tarea) {
         tareasAsignadas.add(tarea);
-        // No notificar aquí, dejémoslo para que la tarea lo maneje
+
     }
 
 
