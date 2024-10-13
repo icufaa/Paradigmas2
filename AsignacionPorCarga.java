@@ -4,7 +4,7 @@ public class AsignacionPorCarga implements EstrategiaAsignacionTareas {
     @Override
     public void asignarTarea(Tarea tarea, List<Empleado> empleados) {
         if (!empleados.isEmpty()) {
-            Empleado empleadoConMenosTareas = empleados.get(0);  // Inicializar con el primer empleado
+            Empleado empleadoConMenosTareas = empleados.get(0); // aca elige el primer empleado
 
             // Buscar el empleado con menos tareas
             for (Empleado empleado : empleados) {
@@ -13,9 +13,9 @@ public class AsignacionPorCarga implements EstrategiaAsignacionTareas {
                 }
             }
 
-            // Asignar la tarea al empleado con menos tareas
-            empleadoConMenosTareas.asignarTarea(tarea);  // Asignar tarea al empleado
-            tarea.asignarEmpleado(empleadoConMenosTareas);  // Asignar el empleado a la tarea
+            // Asignar la tarea al empleado que menos esta laburando
+            empleadoConMenosTareas.asignarTarea(tarea);
+            tarea.asignarEmpleado(empleadoConMenosTareas); 
             System.out.println("Tarea asignada a " + empleadoConMenosTareas.getNombre());
         } else {
             System.out.println("No hay empleados disponibles.");
