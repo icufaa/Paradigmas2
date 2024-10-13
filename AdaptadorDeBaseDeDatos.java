@@ -15,10 +15,9 @@ public class AdaptadorDeBaseDeDatos {
         String descripcion = datosAntiguos.getDescripcionVieja();
         Cliente cliente = new Cliente(datosAntiguos.getClienteViejo(), "cliente@viejo.com");
 
-        // Crea un gerente de prueba (puedes adaptar esto si tienes datos en la base antigua)
+        // Creo un gerente random
         Empleado gerente = FabricaDeEmpleados.crearEmpleado("Desarrollador", "Gerente Antiguo");
 
-        // Devuelve un objeto Proyecto moderno con los datos adaptados
         return new Proyecto(nombre, descripcion, cliente, gerente, new AsignacionAleatoria());
     }
 }
