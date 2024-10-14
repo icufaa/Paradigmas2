@@ -35,14 +35,27 @@ public class Menu {
 
                 // Agregar empleado
                 case 2:
-                    System.out.print("Nombre del empleado: ");
-                    String nombreEmpleado = scanner.nextLine();
-                    System.out.print("Rol (Desarrollador/Tester): ");
-                    String tipoEmpleado = scanner.nextLine();
-                    Empleado empleado = FabricaDeEmpleados.crearEmpleado(tipoEmpleado, nombreEmpleado);
-                    gestor.agregarEmpleado(empleado);
-                    System.out.println("Empleado agregado.");
+                    try {
+                        System.out.print("Nombre del empleado: ");
+                        String nombreEmpleado = scanner.nextLine();
+                        System.out.print("Rol (Desarrollador/Tester): ");
+                        String tipoEmpleado = scanner.nextLine();
+
+                        // Intentamos crear el empleado usando la fábrica
+                        Empleado empleado = FabricaDeEmpleados.crearEmpleado(tipoEmpleado, nombreEmpleado);
+
+                        // Si la creación es exitosa, lo agregamos al gestor
+                        gestor.agregarEmpleado(empleado);
+                        System.out.println("Empleado agregado con éxito.");
+                    } catch (IllegalArgumentException e) {
+                        // Manejo de error si el tipo de empleado no es válido
+                        System.out.println("Error: El tipo de empleado ingresado no es válido.");
+                    } catch (Exception e) {
+                        // Captura cualquier otro tipo de excepción que pueda ocurrir
+                        System.out.println("Ocurrió un error al agregar el empleado: " + e.getMessage());
+                    }
                     break;
+
 
                 // Asignar empleado a proyecto
                 case 3:
