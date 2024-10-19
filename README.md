@@ -24,6 +24,6 @@ Captura de errores comunes como IndexOutOfBoundsException e InputMismatchExcepti
 
 # Ejecución
 Clona el repositorio:
-git clone https://github.com/usuario/gestor-proyectos-empleados.git
+git clone https://github.com/icufaa/Paradigmas2
 
 
