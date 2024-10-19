@@ -28,5 +28,5 @@ git clone https://github.com/icufaa/Paradigmas2.git
 
 
 > [!IMPORTANT]
-Credits: [Cufachan](https://github.com/icufaa)
+Credits: [Viñales Facundo](https://github.com/icufaa)
 
