@@ -15,11 +15,11 @@ El sistema maneja posibles errores, como índices fuera de rango o entradas no v
 Uso de bloques try-catch para manejar errores de entrada y selección, asegurando que el programa sea robusto frente a entradas incorrectas o fuera de rango.
 Captura de errores comunes como IndexOutOfBoundsException e InputMismatchException, brindando mensajes de error descriptivos y permitiendo que el usuario vuelva a intentarlo sin perder el progreso.
 # Patrones de Diseño Implementados
-.Singleton: Garantiza que solo exista una instancia del gestor que maneja empleados y proyectos en todo el sistema.
-.Factory Method: Simplifica la creación de objetos Empleado según el tipo de rol, permitiendo escalabilidad para futuros roles o empleados especializados.
-.Adapter: Facilita la interacción entre diferentes clases que manejan empleados y proyectos, adaptando interfaces cuando es necesario.
-.Observer: Permite que las clases de proyecto se mantengan actualizadas sobre los cambios en los empleados asignados.
-.Strategy: Define diferentes estrategias para la asignación de empleados a proyectos o para la organización de tareas dentro de los proyectos.
+- Singleton: Garantiza que solo exista una instancia del gestor que maneja empleados y proyectos en todo el sistema.
+- Factory Method: Simplifica la creación de objetos Empleado según el tipo de rol, permitiendo escalabilidad para futuros roles o empleados especializados.
+- Adapter: Facilita la interacción entre diferentes clases que manejan empleados y proyectos, adaptando interfaces cuando es necesario.
+- Observer: Permite que las clases de proyecto se mantengan actualizadas sobre los cambios en los empleados asignados.
+- Strategy: Define diferentes estrategias para la asignación de empleados a proyectos o para la organización de tareas dentro de los proyectos.
 
 
 # Ejecución
